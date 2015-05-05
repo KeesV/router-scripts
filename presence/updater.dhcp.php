@@ -1,6 +1,7 @@
 #!/usr/bin/php-cli
 <?php
-	include('inc.config.php');	
+	require_once('inc.config.php');	
+	require_once('updatepresence.php');
 
 	$type = $argv[1];
 	$mac = $argv[2];
@@ -17,7 +18,7 @@
 				syslog(LOG_INFO,"$mac ($name) is in the house, updating presence");
 				
 				//update presence in DB
-				exec(CONF_ROOT_DIR."updatepresence.php $name 1");
+				updatepresence($config, $name, 1);
 			} else {
 				syslog(LOG_INFO,"$mac is not monitored, no action");
 			}
@@ -40,7 +41,7 @@
 				syslog(LOG_INFO,"$mac ($name) has left the house, updating presence");
 
 				//update presence in DB
-				exec(CONF_ROOT_DIR."updatepresence.php $name 0");
+				updatepresence($config, $name, 0);
 			} else {
 				syslog(LOG_INFO,"$mac is not monitored, no action");
 			}

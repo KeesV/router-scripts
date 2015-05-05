@@ -1,9 +1,13 @@
-#!/usr/bin/php-cli
 <?php
-	include('inc.config.php');
+//	require_once('inc.config.php');
 	
-	$phone_to_update = $argv[1];
-	$present = $argv[2];
+	function updatepresence($config, $phone_to_update, $present)
+	{
+	
+	//$phone_to_update = $argv[1];
+	//$present = $argv[2];
+	
+	syslog(LOG_INFO, "Updating presence for ".$phone_to_update);
 	
 	//first get current presence from disk
 	if(file_exists($config->getPresenceDBFileName()))
@@ -32,6 +36,7 @@
 	file_put_contents($config->getPresenceDBFileName(), serialize($presence));
 
 	//Now see if somebody is currently home
+	$ishome = 0;
 	foreach($presence as $phone)
 	{
 		$ishome += $phone['ishome'];
@@ -81,5 +86,5 @@
 		}
 
 	}
-
+	}
 ?>
