@@ -19,8 +19,6 @@
 				
 				//update presence in DB
 				updatepresence($config, $name, 1);
-			} else {
-				syslog(LOG_INFO,"$mac is not monitored, no action");
 			}
 		}
 	}
@@ -42,8 +40,6 @@
 
 				//update presence in DB
 				updatepresence($config, $name, 0);
-			} else {
-				syslog(LOG_INFO,"$mac is not monitored, no action");
 			}
 		}
 	}
