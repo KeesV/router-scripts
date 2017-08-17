@@ -4,8 +4,8 @@
         {
                 private $phonesToMonitor;
 		private $presenceDBFileName;
-		private $veraHost;
-		private $veraPort;
+		private $domoticzHost;
+		private $domoticzPort;
 		private $comingHomeSceneNum;
 		private $leavingHomeSceneNum;		
 
@@ -35,30 +35,30 @@
 			return $this->presenceDBFileName;
 		}
 
-		public function setVeraHost($hostname)
+		public function setDomoticzHost($hostname)
 		{
-			$this->veraHost = $hostname;
+			$this->domoticzHost = $hostname;
 		}
 	
-		public function getVeraHost()
+		public function getDomoticzHost()
 		{
-			return $this->veraHost;
+			return $this->domoticzHost;
 		}
 
-		public function setVeraPort($port)
+		public function setDomoticzPort($port)
 		{
-			$this->veraPort = $port;
+			$this->domoticzPort = $port;
 		}
 
-		public function getVeraPort()
+		public function getDomoticzPort()
 		{
-			return $this->veraPort;
+			return $this->domoticzPort;
 		}
 
-		public function getVeraUrl()
+		public function getDomoticzUrl()
 		{
-			$host = $this->getVeraHost();
-			$port = $this->getVeraPort();
+			$host = $this->getDomoticzHost();
+			$port = $this->getDomoticzPort();
 			$url = $host.':'.$port;
 			return $url;
 		}

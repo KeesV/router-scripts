@@ -56,11 +56,12 @@
 		{
 			//now home, turn on the lights!
 			syslog(LOG_INFO,"$phone_to_update is now home, was not before: Turning on the lights!");
-			$veraurl = $config->getVeraUrl();
+			$domoticzurl = $config->getDomoticzUrl();
 			$sceneNum = $config->getComingHomeSceneNum();
-			$requestUrl = 'http://'.$veraurl.'/data_request?id=lu_action&serviceId=urn:micasaverde-com:serviceId:HomeAutomationGateway1&action=RunScene&SceneNum='.$sceneNum;
+			$requestUrl = 'http://'.$domoticzurl.'/json.htm?type=command&param=switchscene&idx='.$sceneNum.'&switchcmd=On';
 			syslog(LOG_INFO,"Using request URL: ".$requestUrl);
-			file_get_contents($requestUrl);
+			$response = file_get_contents($requestUrl);
+			syslog(LOG_INFO, "Got response: $response");
 
 		}
 		if($washome == 1)
@@ -78,11 +79,12 @@
 		{
 			//we have left the building
 			syslog(LOG_INFO,"$phone_to_update is not home anymore: Turning off the lights!");
-			$veraurl = $config->getVeraUrl();
+			$domoticzurl = $config->getDomoticzUrl();
 			$sceneNum = $config->getLeavingHomeSceneNum();
-			$requestUrl = 'http://'.$veraurl.'/data_request?id=lu_action&serviceId=urn:micasaverde-com:serviceId:HomeAutomationGateway1&action=RunScene&SceneNum='.$sceneNum;
+			$requestUrl = 'http://'.$domoticzurl.'/json.htm?type=command&param=switchscene&idx='.$sceneNum.'&switchcmd=On';
 			syslog(LOG_INFO,"Using request URL: ".$requestUrl);
-			file_get_contents($requestUrl);
+			$response = file_get_contents($requestUrl);
+			syslog(LOG_INFO, "Got response: $response");
 		}
 
 	}

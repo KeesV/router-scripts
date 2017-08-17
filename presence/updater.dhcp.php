@@ -1,5 +1,6 @@
 #!/usr/bin/php-cli
 <?php
+	syslog(LOG_INFO, "Running updater.dhcp.php");
 	require_once('inc.config.php');	
 	require_once('updatepresence.php');
 
@@ -12,7 +13,7 @@
 		//see if this is a phone we should monitor
 		foreach($config->getPhonesToMonitor() as $phoneToMonitor)
 		{
-			if($phoneToMonitor->getMac() == $mac)
+			if(strtoupper($phoneToMonitor->getMac()) == strtoupper($mac))
 			{
 				$name = $phoneToMonitor->getName();
 				syslog(LOG_INFO,"$mac ($name) is in the house, updating presence");
@@ -33,7 +34,7 @@
 		//see if this is a phone we should monitor
 		foreach($config->getPhonesToMonitor() as $phoneToMonitor)
 		{
-			if($phoneToMonitor->getMac() == $mac)
+			if(strtoupper($phoneToMonitor->getMac()) == strtoupper($mac))
 			{
 				$name = $phoneToMonitor->getName();
 				syslog(LOG_INFO,"$mac ($name) has left the house, updating presence");
